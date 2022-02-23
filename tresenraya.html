@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="estilodejuego.css">
+    <title>Juego de 3 en raya</title>
+     <script>
+         var estado_tablero = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+         var jugador = 1;
+        function dibujar() {
+            for(i = 0; i < 9; i++) {
+                if (estado_tablero[i] == 0) document.getElementById("celda" + i).style = "background-color: white";
+                if (estado_tablero[i] == 1) document.getElementById("celda" + i).style = "background-color: red";
+                if (estado_tablero[i] == 2) document.getElementById("celda" + i).style = "background-color: blue";
+            }
+        }
+
+        function fcelda(celda) {
+            if (estado_tablero[celda] == 0) {
+                if (jugador == 1) {
+                    estado_tablero[celda] = 1;
+                    jugador = 2;
+                } else {
+                    estado_tablero[celda] = 2;
+                    jugador = 1;
+
+                }
+            } else {
+                alert("Esa celda ya está seleccionada");
+            }
+
+            dibujar()
+        }
+        
+        function mostrar_mensaje(estado) {
+            if (estado == 0) {
+                
+            } else if (estado == 1) { alert("¡Ganó el rojo!");
+            } else if (estado == 2) { alert("¡Ganó el azul!");
+            }else if (estado == 3) { alert("Empate");
+            }
+        }
+        
+        function ganador() {
+            var numceldasvacias = 0;
+            for (i = 0; i < 0; i++) {
+                if(estado_tablero[i] == 0) numceldasvacias = numceldasvacias + 1;
+            }
+            if (estado_tablero[0] == estado_tablero[1] && estado_tablero[1] == estado_tablero[2] && estado_tablero[0] != 0) return estado_tablero[0];
+            if (estado_tablero[3] == estado_tablero[4] && estado_tablero[4] == estado_tablero[5] && estado_tablero[3] != 0) return estado_tablero[3];
+            if (estado_tablero[6] == estado_tablero[7] && estado_tablero[7] == estado_tablero[8] && estado_tablero[6] != 0) return estado_tablero[6];
+
+            if (estado_tablero[0] == estado_tablero[3] && estado_tablero[3] == estado_tablero[6] && estado_tablero[0] != 0) return estado_tablero[0];
+            if (estado_tablero[1] == estado_tablero[4] && estado_tablero[4] == estado_tablero[7] && estado_tablero[1] != 0) return estado_tablero[1];
+            if (estado_tablero[2] == estado_tablero[5] && estado_tablero[5] == estado_tablero[8] && estado_tablero[2] != 0) return estado_tablero[2];
+
+            if (estado_tablero[0] == estado_tablero[4] && estado_tablero[4] == estado_tablero[8] && estado_tablero[0] != 0) return estado_tablero[0];
+            if (estado_tablero[2] == estado_tablero[4] && estado_tablero[4] == estado_tablero[6] && estado_tablero[2] != 0) return estado_tablero[2];
+            if (numceldasvacias > 0) {
+                return 0;
+            } else {
+                return 3;
+            }
+            mostrar_mensaje(estado)
+            ganador()
+        }
+
+    </script>
+<div id="zona-botones">
+    <button><a class="boton" href="javascript:location.reload()">Reiniciar</a></button>
+</div>
+</head>
+<body>
+    <h1>Juego de 3 en raya</h1>
+    <div class="contenedor">
+        <table>
+            <tr>
+                <td id="celda0" onclick="fcelda(0)"></td>
+                <td id="celda1" onclick="fcelda(1)"></td>
+                <td id="celda2" onclick="fcelda(2)"></td>
+            </tr>
+
+            <tr>
+                <td id="celda3" onclick="fcelda(3)"></td>
+                <td id="celda4" onclick="fcelda(4)"></td>
+                <td id="celda5" onclick="fcelda(5)"></td>
+            </tr>
+
+            <tr>
+                <td id="celda6" onclick="fcelda(6)"></td>
+                <td id="celda7" onclick="fcelda(7)"></td>
+                <td id="celda8" onclick="fcelda(8)"></td>
+            </tr>
+        </table>
+    </div>
+
+</body>
+
+</html>
